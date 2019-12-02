@@ -6,18 +6,11 @@ export const prefix = '/';
 
 /**
  * Hello world for the root
- *
  */
-
-
-let path = require('path');
 router.get('/', function (req, res) {
-  //res.sendFile(__dirname + './../login/index.html');
-  res.sendFile(path.resolve('login/index.html'));
-  /*res.send({
+  res.send({
     status: 'You have reached the root of the API!',
     repo: 'https://github.com/cgburgess/comp426-backend'
   })
-  */
 });
 
