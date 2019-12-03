@@ -8,9 +8,9 @@ $(document).ready(function () {
             data: {
                     "name": emailAddress,
                     "pass": passWord,
-                    }
-            });
-          
-          window.location.replace("../login/index.html");
+            }
+        });  
+        window.location.replace("../login/index.html");
+        //hahahaah
     });
 });
