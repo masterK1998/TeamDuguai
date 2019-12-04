@@ -5,6 +5,12 @@
     },
     "kevin": {
       "passwordHash": "$2b$10$ZdP0PVNUsqrAlNOqhZURReQ2RbhYPSCS57SvLCuRURyl1y7lyK0Ue"
+    },
+    "larry": {
+      "passwordHash": "$2b$10$0JLXhpYDAWV/K5hUsZLy3.sxOPc.bvOVDJ0nhWrn2hs.d3rF/a/Va"
+    },
+    "test": {
+      "passwordHash": "$2b$10$U8OfZTcsQinTdgcT7ZVmL.2LjOur4MHUiCMBwyD2jaZ5ra4W3QxAG"
     }
   }
 }
