@@ -2,6 +2,9 @@
   "users": {
     "liruochen": {
       "passwordHash": "$2b$10$5gM4JKKlvEQg183embD9YufsvqgPbSTm1nXvMG4x.HbcXaLZfV6w."
+    },
+    "kevin": {
+      "passwordHash": "$2b$10$ZdP0PVNUsqrAlNOqhZURReQ2RbhYPSCS57SvLCuRURyl1y7lyK0Ue"
     }
   }
 }

@@ -1,16 +1,18 @@
 $(document).ready(function () {
-    $('.main').on('click', '#create', async function(){      
+    $('.main').on('click', '#login', async function(){      
         let username = $('#username').val();
         let passWord = $('#password').val();
         let result  = await axios({
             method: 'POST',
-            url: 'http://localhost:3000/account/create',
+            url: 'http://localhost:3000/account/login',
             data: {
                     "name": username,
                     "pass": passWord,
             }
         });  
-        window.location.replace("../login/index.html");
-        //hahahaah
+        console.log(result.data.jwt);
+        
+        localStorage.setItem("jwt", result.data.jwt);
+        //window.location.replace("../index.html");
     });
 });
