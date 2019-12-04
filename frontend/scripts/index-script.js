@@ -14,11 +14,12 @@ async function main() {
     
     
     console.log(result);
-    axios.post("http://localhost:3000/user/fav/", {data: {} },{headers: { Authorization: `Bearer ${jwt}` }});
+    axios.post("http://localhost:3000/user/contact/feng", {data: {} },{headers: { Authorization: `Bearer ${jwt}` }});
+    axios.get("http://localhost:3000/user/info", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawProfile(res));
+    axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawContact(res));
    
 
     // draw profile column
-    drawProfile();
 
 
     // draw feed column
@@ -26,20 +27,39 @@ async function main() {
 
 
     // draw contact column
-    drawContact();
 }
 
     
-function drawProfile() {
-    $()
+function drawProfile(res) {
+    console.log(res);
+    $(`#profile`).append(`
+
+    <p> User Name: </p>
+    <p> First Name: ${res.data.result.firstname} </p>
+    <p> Last Name: ${res.data.result.lastname} </p>
+    <p> Onyen: </p>
+    <p> PID: </p>
+    <p> Year: </p>
+    <input class="btn btn-info" type="button" value="edit"> 
+
+
+
+    `);
 
 }
 
-function drawFeed() {
+function drawFeed(res) {
 
 }
 
-function drawContact() {
+function drawContact(res) {
+
+    console.log("in contact", res);
+    $(`#contact`).append(`<input class="btn btn-info" type="button" value="add friend">`);
+    for (let i = 0; i < res.data.result.length; i++) {
+        $(`#contact`).append(`<p> ${res.data.result[i]} </p>`);
+    }
+
 
 }
 
