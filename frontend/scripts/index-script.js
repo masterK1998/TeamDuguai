@@ -17,8 +17,31 @@ async function main() {
     axios.post("http://localhost:3000/user/fav/", {data: {} },{headers: { Authorization: `Bearer ${jwt}` }});
    
 
+    // draw profile column
+    drawProfile();
+
+
+    // draw feed column
+    drawFeed();
+
+
+    // draw contact column
+    drawContact();
 }
+
     
+function drawProfile() {
+    $()
+
+}
+
+function drawFeed() {
+
+}
+
+function drawContact() {
+
+}
 
 
 
