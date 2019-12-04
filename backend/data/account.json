@@ -11,6 +11,27 @@
     },
     "test": {
       "passwordHash": "$2b$10$U8OfZTcsQinTdgcT7ZVmL.2LjOur4MHUiCMBwyD2jaZ5ra4W3QxAG"
+    },
+    "test2": {
+      "passwordHash": "$2b$10$ktMSax3xIFtaj1ihk5R5Ne4oqnNywcsg5PruZlwTPLNZcfsQ/WjBa"
+    },
+    "larry123": {
+      "passwordHash": "$2b$10$6oaVY7DPTV14sij9grYUHu6moVvU0MkcQE1fSVdtNw/jUvzkFdtD6"
+    },
+    "larry1233": {
+      "passwordHash": "$2b$10$c9J1bHRHfdrtjKQRog0HbedJbSzbY0ODv9fnBU3B4AHOb4ttP/5FW"
+    },
+    "larry123123": {
+      "passwordHash": "$2b$10$iTt3okyTDDsByzYfAB9xVek5eZGo/Eknzn8hL3ZNj/V1VIXWh06PC"
+    },
+    "kevin123": {
+      "passwordHash": "$2b$10$OTBRf6J0075m6tdWsoCjJue7DVOR9Q3Lw0LanuGJraPpt4VBMbI36"
+    },
+    "lar": {
+      "passwordHash": "$2b$10$OlcwNXDAE5.LDcw0fWcbau404AhVfUY.2CR1CuBgq9uwTo3Z57/IO"
+    },
+    "lary": {
+      "passwordHash": "$2b$10$qenD1zoL871Dk63nbaDD8eNqD1fCMzlB07VGttPYoOnvdVFI/gUvG"
     }
   }
 }

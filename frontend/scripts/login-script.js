@@ -13,6 +13,6 @@ $(document).ready(function () {
         console.log(result.data.jwt);
         
         localStorage.setItem("jwt", result.data.jwt);
-        //window.location.replace("../index.html");
+        window.location.replace("../index.html");
     });
 });
