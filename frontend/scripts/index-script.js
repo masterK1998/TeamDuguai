@@ -22,7 +22,7 @@ async function main() {
 
 
     // draw feed column
-    drawFeed();
+
 
 
     // draw contact column
@@ -83,9 +83,6 @@ function drawProfile(res) {
 
 }
 
-function drawFeed(res) {
-
-}
 
 function drawContact(res) {
     let jwt = localStorage.getItem("jwt");

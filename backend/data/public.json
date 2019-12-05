@@ -1,2 +1,34 @@
 {
+  "parking": {
+    "cobb": {
+      "name": "cobb deck",
+      "price": "$1"
+    },
+    "morison": {
+      "name": "morison deck",
+      "price": "$2"
+    }
+  },
+  "dinning": {
+    "rams": {
+      "name": "rams",
+      "menu": [
+        "Squid",
+        "Octopus",
+        "Scallops",
+        "Lobster",
+        "Crab"
+      ]
+    },
+    "lenoir": {
+      "name": "lenoir",
+      "menu": [
+        "Filet",
+        "Oysters",
+        "Mussels",
+        "Clams",
+        "Tuna"
+      ]
+    }
+  }
 }
