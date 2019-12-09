@@ -1,23 +1,22 @@
 async function main() {
 
-    console.log("in main page");
+
     let jwt = localStorage.getItem("jwt");
     console.log(jwt);
 
-    let result  = await axios({
-        method: 'GET',
-        url: 'http://localhost:3000/account/status',
-        headers: {
-            'Authorization': 'Bearer ' + jwt,
-        }
-    });  
-    
-    
-    console.log(result);
-    axios.get("http://localhost:3000/user/info", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawProfile(res));
-    axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawContact(res));
+    if (jwt != "out") {
+        loggedIn();
+        
+    } else {
+        // logged out page
+    }
 
+    loadWeatherInNav();
    
+
+}
+
+async function loadWeatherInNav() {
     let weather = axios({
         method: 'get',
         url: 'http://api.openweathermap.org/data/2.5/weather?id=4460162&appid=511493cb76df7d7454e9eccae28062d5&units=metric',
@@ -30,8 +29,90 @@ async function main() {
         console.log(value.data.weather[0].icon);
         $(`#weather`).html(`<img border="0" id="weathericon" alt="" src="http://openweathermap.org/img/wn/${value.data.weather[0].icon}@2x.png" width="50" height="50"> 
         `);
-    });    
+    }); 
+}
+async function loggedIn() {
 
+    let jwt = localStorage.getItem("jwt");
+    let result  = await axios({
+        method: 'GET',
+        url: 'http://localhost:3000/account/status',
+        headers: {
+            'Authorization': 'Bearer ' + jwt,
+        }
+    });  
+    
+    
+    console.log(result);
+    axios.get("http://localhost:3000/user/info", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawProfile(res));
+    axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawContact(res));
+    axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawTransfer(res));
+
+
+}
+
+async function transferMoney() {
+    $(`#profile`).append(`
+    <button type="button" class="btn btn-primary" id="send">
+                            send money
+        </button>
+        `);
+}
+
+
+function drawTransfer(res) {
+    transferMoney();
+    let jwt = localStorage.getItem("jwt");
+    $('#send').on('click', () => {
+        $('#profile').append(`<div class = 'submitdiv'> 
+                    <input id="transferto" type = "text" name = "to" class = 'textto' placeholder="to">
+                    <input type = "number" name = "amount" class = 'textamount' placeholder="amount">
+                    <input type = "text" name = "reference" class = 'textcomment' placeholder="any comment?">
+                    <button class = "send" type = "button">send</button>
+                  </div>`);
+
+    
+        $("#transferto").on("keyup",_.debounce(async function(e) {
+        //res=await axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }});
+        console.log(res.data.result);
+        $("#transferto").autocomplete({
+            source: res.data.result,
+        });
+        },300));
+        $('.send').on('click', () => {
+                let to = "" + $('.textto').val();
+                let amount = 0
+                amount += $('.textamount').val();
+                let comment = "" + $('.textcomment').val();
+                if(!res.data.result.includes(to))
+                    alert("friend not found")
+                else {
+                    axios.get("http://localhost:3000/user/amount", {headers: { Authorization: `Bearer ${jwt}` }}).then((result) => {
+                        let asset = result.data.result
+                        if(asset < amount) alert("we need more gold")
+                        else {
+                            axios.get('http://localhost:3000/private/increment', {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => {
+                                let nextId = 1;
+                                nextId += res.data.result;
+                                axios.get("http://localhost:3000/account/status", {headers: { Authorization: `Bearer ${jwt}` }}).then((result) => {
+                                    let user = "";
+                                    user += result.data.user.name;
+                                    axios.post('http://localhost:3000/private/trans/' + nextId, {data :{id: nextId, from: user, to: to, amount: amount * 1, comment: comment, accepted: false, likes: []}}, {headers: { Authorization: `Bearer ${jwt}` }})
+                                    axios.post('http://localhost:3000/private/increment', {data: nextId}, {headers: { Authorization: `Bearer ${jwt}` }})
+                                    let sum = 0;
+                                    sum += asset - amount;
+                                    console.log(sum);
+                                    axios.post('http://localhost:3000/user/amount', {data: sum}, {headers: { Authorization: `Bearer ${jwt}` }})
+                                }) 
+                            })
+                        }
+                    })
+                };
+                $('.submitdiv').remove();
+
+        })
+    //$(".text").val(data);
+    })
 }
 
 function renderProfile(person) {
@@ -76,6 +157,8 @@ function drawProfile(res) {
                 <p> Onyen </p>
                 <input type="text" value="${person.onyen}">
                 <p> PID </p>
+                <input type="text" value="${person.pid}">
+                <p> Amount </p>
                 <input type="text" value="${person.pid}">
             </form>
             <input class="btn btn-info" type="button" value="submit" id="submitprofilebtn"> 
@@ -124,7 +207,7 @@ function drawContact(res) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add Contact</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -149,6 +232,7 @@ function drawContact(res) {
     $(`#addcontactbtn`).on('click', () => {
         let contact = $(`#contactname`).val();
         axios.post("http://localhost:3000/user/contact/" + contact, {data: {} },{headers: { Authorization: `Bearer ${jwt}` }});
+        window.location.reload();
     });
 
     for (let i = 0; i < res.data.result.length; i++) {

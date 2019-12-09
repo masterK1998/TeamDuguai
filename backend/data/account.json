@@ -32,6 +32,9 @@
     },
     "lary": {
       "passwordHash": "$2b$10$qenD1zoL871Dk63nbaDD8eNqD1fCMzlB07VGttPYoOnvdVFI/gUvG"
+    },
+    "test123": {
+      "passwordHash": "$2b$10$vuTLm9Ggsigit1nk0ZrrCusjIFw2RLg1xDsHIJKW/0Vjvkk/q3Yc6"
     }
   }
 }
