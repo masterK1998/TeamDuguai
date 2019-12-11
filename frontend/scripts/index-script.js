@@ -52,11 +52,7 @@ async function loggedIn() {
 }
 
 async function transferMoney() {
-    $(`#profile`).append(`
-    <button type="button" class="btn btn-primary" id="send">
-                            send money
-        </button>
-        `);
+    $(`#profile`).append(`<button type="button" class="btn btn-primary" id="send"> send money </button>`);
 }
 
 
@@ -64,6 +60,7 @@ function drawTransfer(res) {
     transferMoney();
     let jwt = localStorage.getItem("jwt");
     $('#send').on('click', () => {
+        $('#send').hide()
         $('#profile').append(`<div class = 'submitdiv'> 
                     <input id="transferto" type = "text" name = "to" class = 'textto' placeholder="to">
                     <input type = "number" name = "amount" class = 'textamount' placeholder="amount">
@@ -80,10 +77,9 @@ function drawTransfer(res) {
         });
         },300));
         $('.send').on('click', () => {
-                let to = "" + $('.textto').val();
-                let amount = 0
-                amount += $('.textamount').val();
-                let comment = "" + $('.textcomment').val();
+                let to = $('.textto').val();
+                let amount = $('.textamount').val();
+                let comment = $('.textcomment').val();
                 if(!res.data.result.includes(to))
                     alert("friend not found")
                 else {
@@ -109,7 +105,7 @@ function drawTransfer(res) {
                     })
                 };
                 $('.submitdiv').remove();
-
+                $('#send').show()
         })
     //$(".text").val(data);
     })
