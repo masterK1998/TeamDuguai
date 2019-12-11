@@ -47,24 +47,66 @@ async function loggedIn() {
     axios.get("http://localhost:3000/user/info", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawProfile(res));
     axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawContact(res));
     axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawTransfer(res));
+    axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawRequest(res));
 
 
 }
 
-async function transferMoney() {
-    $(`#profile`).append(`<button type="button" class="btn btn-primary" id="send"> send money </button>`);
+function drawRequest(res) {
+    $(`#profile`).append(`<button type="button" class="btn btn-primary" id="request"> request money </button>`);
+    $('#request').on('click', () => {
+        $('#request').hide()
+        $('#profile').append(`<div id = 'submitrequest'> 
+                    <input id="requestfrom" type = "text" name = "to" class = 'requestto' placeholder="from">
+                    <input type = "number" name = "amount" class = 'requesamount' placeholder="amount">
+                    <input type = "text" name = "reference" class = 'requestcomment' placeholder="any comment?">
+                    <input type = "checkbox" name = "public" class = 'requestpublic'>
+                    <label for = "public">Do you want others notice when you recieve?</label>
+                    <button class = "request" type = "button">send</button>
+                  </div>`);
+        $("#requestfrom").on("keyup",_.debounce(async function(e) {
+        //res=await axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }});
+        console.log(res.data.result);
+        $("#requestfrom").autocomplete({
+            source: res.data.result,
+        });
+        },300));
+        $('.request').on('click', () => {
+            let to = $('.requestto').val();
+            let amount = $('.requesamount').val();
+            let comment = $('.requestcomment').val();
+            let public = $('.requestpublic').is(":checked")
+            if(!res.data.result.includes(to)) alert("friend not found")
+            else  if(amount < 1) alert("invalid amount")
+            else {
+                axios.get('http://localhost:3000/private/increment', {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => {
+                    let nextId = 1;
+                    nextId += res.data.result;
+                    axios.get("http://localhost:3000/account/status", {headers: { Authorization: `Bearer ${jwt}` }}).then((result) => {
+                        let user = "";
+                        user += result.data.user.name;
+                        axios.post('http://localhost:3000/private/request/' + nextId, {data :{id: nextId, from: user, to: to, amount: amount * 1, comment: comment, accepted: false, public: public}}, {headers: { Authorization: `Bearer ${jwt}` }})
+                        axios.post('http://localhost:3000/private/increment', {data: nextId}, {headers: { Authorization: `Bearer ${jwt}` }})
+                    }) 
+                })
+            };
+            $('#submitrequest').remove();
+            $('#request').show()
+        })
+    })
 }
-
 
 function drawTransfer(res) {
-    transferMoney();
+    $(`#profile`).append(`<button type="button" class="btn btn-primary" id="send"> send money </button>`);
     let jwt = localStorage.getItem("jwt");
     $('#send').on('click', () => {
         $('#send').hide()
-        $('#profile').append(`<div class = 'submitdiv'> 
+        $('#profile').append(`<div id = 'submitsend'> 
                     <input id="transferto" type = "text" name = "to" class = 'textto' placeholder="to">
                     <input type = "number" name = "amount" class = 'textamount' placeholder="amount">
                     <input type = "text" name = "reference" class = 'textcomment' placeholder="any comment?">
+                    <input type = "checkbox" name = "public" class = 'textpublic'>
+                    <label for = "public">Do you want others see this transfer?</label>
                     <button class = "send" type = "button">send</button>
                   </div>`);
 
@@ -77,35 +119,36 @@ function drawTransfer(res) {
         });
         },300));
         $('.send').on('click', () => {
-                let to = $('.textto').val();
-                let amount = $('.textamount').val();
-                let comment = $('.textcomment').val();
-                if(!res.data.result.includes(to))
-                    alert("friend not found")
-                else {
-                    axios.get("http://localhost:3000/user/amount", {headers: { Authorization: `Bearer ${jwt}` }}).then((result) => {
-                        let asset = result.data.result
-                        if(asset < amount) alert("we need more gold")
-                        else {
-                            axios.get('http://localhost:3000/private/increment', {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => {
-                                let nextId = 1;
-                                nextId += res.data.result;
-                                axios.get("http://localhost:3000/account/status", {headers: { Authorization: `Bearer ${jwt}` }}).then((result) => {
-                                    let user = "";
-                                    user += result.data.user.name;
-                                    axios.post('http://localhost:3000/private/trans/' + nextId, {data :{id: nextId, from: user, to: to, amount: amount * 1, comment: comment, accepted: false, likes: []}}, {headers: { Authorization: `Bearer ${jwt}` }})
-                                    axios.post('http://localhost:3000/private/increment', {data: nextId}, {headers: { Authorization: `Bearer ${jwt}` }})
-                                    let sum = 0;
-                                    sum += asset - amount;
-                                    console.log(sum);
-                                    axios.post('http://localhost:3000/user/amount', {data: sum}, {headers: { Authorization: `Bearer ${jwt}` }})
-                                }) 
-                            })
-                        }
-                    })
-                };
-                $('.submitdiv').remove();
-                $('#send').show()
+            let to = $('.textto').val();
+            let amount = $('.textamount').val();
+            let comment = $('.textcomment').val();
+            let public = $('.textpublic').is(":checked")
+            if(!res.data.result.includes(to)) alert("friend not found")
+            else  if(amount < 1) alert("invalid amount")
+            else {
+                axios.get("http://localhost:3000/user/amount", {headers: { Authorization: `Bearer ${jwt}` }}).then((result) => {
+                    let asset = result.data.result
+                    if(asset < amount) alert("we need more gold")
+                    else {
+                        axios.get('http://localhost:3000/private/increment', {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => {
+                            let nextId = 1;
+                            nextId += res.data.result;
+                            axios.get("http://localhost:3000/account/status", {headers: { Authorization: `Bearer ${jwt}` }}).then((result) => {
+                                let user = "";
+                                user += result.data.user.name;
+                                axios.post('http://localhost:3000/private/trans/' + nextId, {data :{id: nextId, from: user, to: to, amount: amount * 1, comment: comment, accepted: false, likes: [], public: public}}, {headers: { Authorization: `Bearer ${jwt}` }})
+                                axios.post('http://localhost:3000/private/increment', {data: nextId}, {headers: { Authorization: `Bearer ${jwt}` }})
+                                let sum = 0;
+                                sum += asset - amount;
+                                console.log(sum);
+                                axios.post('http://localhost:3000/user/amount', {data: sum}, {headers: { Authorization: `Bearer ${jwt}` }})
+                            }) 
+                        })
+                    }
+                })
+            };
+            $('#submitsend').remove();
+            $('#send').show()
         })
     //$(".text").val(data);
     })

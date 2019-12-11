@@ -11,7 +11,7 @@
     "contact": {
       "kevin": {}
     },
-    "amount": 988
+    "amount": 1300
   },
   "test123": {
     "test": {
@@ -52,13 +52,13 @@
   },
   "kevin": {
     "info": {
-      "username": "kevin",
-      "firstname": "kevin",
-      "lastname": "huang",
+      "username": "",
+      "firstname": "",
+      "lastname": "",
       "onyen": "",
       "pid": ""
     },
     "contact": {},
-    "amount": 1012
+    "amount": null
   }
 }

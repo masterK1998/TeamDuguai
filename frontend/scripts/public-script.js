@@ -84,6 +84,7 @@ $(document).ready(function () {
             let likeid = "commentlike" + rec.id;
             let lkid = "commentlk" + rec.id;
             let id = "rec" + rec.id
+            let delid = "del" + rec.id
             $('#dinningcomment').append(
                 `<div id = ${id} class = "record">
                     <div>${rec.from}</div>
@@ -103,7 +104,6 @@ $(document).ready(function () {
                         $('#' +  id).append(`<button id = ${likeid}>unlike</button>`)
                     }
                     $('#' + likeid).on('click', () => {
-                        console.log("clicked")
                         if($('#' + likeid).html() == 'like') {
                             axios.get('http://localhost:3000/public/comment/' + rec.id + '/likes', {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => {
                                 let likepeople = res.data.result;
@@ -126,6 +126,12 @@ $(document).ready(function () {
                             $('#' + likeid).html("like")
                         }
                     })
+                    if(rec.from == user) {
+                        $('#' +  id).append(`<button id = ${delid}>delete</button>`)
+                        $('#' + delid).on('click', () => {
+                            axios.delete('http://localhost:3000/public/comment/' + rec.id, {headers: { Authorization: `Bearer ${jwt}` }})
+                        })
+                    }
                 })
             }
         }

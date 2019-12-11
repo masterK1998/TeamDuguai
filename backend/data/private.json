@@ -8,21 +8,49 @@
       "comment": "duguai",
       "accepted": true,
       "likes": [
+        "larry",
         "test",
         "kevin"
-      ]
+      ],
+      "public": false
     },
+    "2": {
+      "id": 2,
+      "from": "kevin",
+      "to": "larry",
+      "amount": 300,
+      "comment": "re: hei",
+      "accepted": true,
+      "likes": [],
+      "public": true
+    },
+    "4": {
+      "id": 4,
+      "from": "larry",
+      "to": "kevin",
+      "amount": 10,
+      "comment": "re: a",
+      "accepted": true,
+      "likes": []
+    }
+  },
+  "increment": 6,
+  "request": {
     "2": {
       "id": 2,
       "from": "larry",
       "to": "kevin",
-      "amount": 12,
-      "comment": "123",
-      "accepted": true,
-      "likes": [
-        "larry"
-      ]
+      "amount": 500,
+      "comment": "1",
+      "accepted": true
+    },
+    "6": {
+      "id": 6,
+      "from": "larry",
+      "to": "kevin",
+      "amount": 300,
+      "comment": "hei",
+      "accepted": true
     }
-  },
-  "increment": 2
+  }
 }
