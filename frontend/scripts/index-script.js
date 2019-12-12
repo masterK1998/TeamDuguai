@@ -42,14 +42,18 @@ async function loggedIn() {
         }
     });  
     
-    
+    try {
+        axios.get("http://localhost:3000/user/info", {headers: { Authorization: `Bearer ${jwt}` }})
+    }
+    catch{
+        alert("sth wrong")
+    }
     console.log(result);
     axios.get("http://localhost:3000/user/info", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawProfile(res));
     axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawContact(res));
     axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawTransfer(res));
     axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => drawRequest(res));
-
-
+    
 }
 
 function drawRequest(res) {

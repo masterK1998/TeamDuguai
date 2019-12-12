@@ -1,7 +1,7 @@
 $(document).ready(function () {
     async function newsFeeds (){   
        
-        //axios.delete('http://localhost:3000/public/dinning').then((res) => console.log(res));
+        //axios.post('http://localhost:3000/public/comment', {data: {}}).then((res) => console.log(res));
         //axios.post('http://localhost:3000/public/dinning/rams', {data :{name: "rams", menu: ["Squid", "Octopus", "Scallops", "Lobster", "Crab"]}}).then((res) => console.log(res));
         //axios.post('http://localhost:3000/public/dinning/lenoir', {data :{name: "lenoir", menu: ["Filet", "Oysters", "Mussels", "Clams", "Tuna"]}}).then((res) => console.log(res));
         //axios.post('http://localhost:3000/public/dinning/shanghai', {data :{name: "shanghai dumplings", menu: ["dumpling"]}}).then((res) => console.log(res));
