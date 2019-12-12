@@ -71,13 +71,13 @@ function drawRequest(res) {
           </button>
         </div>
         <div class="modal-body">
-        <div id = 'submitrequest'> 
+        <form id = 'submitrequest'> 
                     <input id="requestfrom" type = "text" name = "to" class = 'requestto' placeholder="from">
                     <input type = "number" name = "amount" class = 'requesamount' placeholder="amount">
                     <input type = "text" name = "reference" class = 'requestcomment' placeholder="any comment?">
                     <input type = "checkbox" name = "public" class = 'requestpublic'>
                     <label for = "public">Do you want others notice when you recieve?</label>
-                  </div>
+                  </form>
         
         </div>
         <div class="modal-footer">

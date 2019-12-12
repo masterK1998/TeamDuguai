@@ -6,3 +6,11 @@
 .fa-cog {
   color: black;
 }
+
+.ui-autocomplete {
+  z-index: 215000000 !important;
+}
+
+.ui-front {
+  z-index: 9999;
+}
