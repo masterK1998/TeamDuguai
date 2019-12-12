@@ -46,15 +46,17 @@ $(document).ready(function () {
 
         $('#comment').on('click', () => {
             let jwt = localStorage.getItem("jwt");
-            if (jwt == "out") alert("plaese login to  leave comment!")
+            if (jwt == "out") alert("plaese login to leave comment!")
             else{
                 $('#comment').hide()
                 $('#dinninginfo').append(`<div id = 'submitpost'> 
-                            <input type = "text" name = "reference" class = 'textcomment' placeholder="any comment?">
-                            <button class = "post btn btn-sm btn-outline-dark" type = "button">post</button>
+                            <input id="textcommentinput" type = "text" name = "reference" class="textcomment" placeholder="any comment?">
+                            <button id="tete" class = "post btn btn-sm btn-outline-dark" type = "button">post</button>
                         </div>`);
-                $('.post').on('click', () => {
-                    let comment = $('.textcomment').val();
+                $('#tete').on('click', () => {
+                    console.log($(`#textcommentinput`));
+                    let comment = $('#textcommentinput').val();
+                    console.log(comment);
                     axios.get('http://localhost:3000/public/increment', {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => {
                         let nextId = 1;
                         nextId += res.data.result;
@@ -73,7 +75,7 @@ $(document).ready(function () {
     }
 
     function drawComment(res) {
-        console.log(res)
+        console.log("comment", res)
         let com = Object.keys(res.data.result);
         $('#dinninginfo').append(
             `<div id = dinningcomment></div>`
