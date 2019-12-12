@@ -5,17 +5,7 @@ function loadNav() {
     <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-unc fixed-top">
       <a class="navbar-brand" href="#">CarolinaPay</a>
       <a id="weather"> Weather </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Useful Links
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" aria-labelledby="navbardropdown">
               <a class="dropdown-item" href="https://sakai.unc.edu">Sakai</a>
               <a class="dropdown-item" href="https://connectcarolina.unc.edu">Connect Carolina</a>
               <a class="dropdown-item" href="https://dining.unc.edu/menu-hours/">CDS</a>
@@ -23,16 +13,19 @@ function loadNav() {
               <a class="dropdown-item" href="https://library.unc.edu/">Library</a>
               <a class="dropdown-item" href="https://campusrec.unc.edu/">Rec</a>
             </div>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Useful Links
+            </a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-success btn-sm my-2 my-sm-0" type="submit">Search</button>
-        </form>
       </div>
       
-      <a href="login/create.html"><button class="btn btn-light btn-sm my-2 my-sm-0" type="submit" id="signupbtn">Sign up</button>
-      <a href="login/index.html"><button class="btn btn-dark btn-sm my-2 my-sm-0" type="submit" id="loginbtn">Log in</button>
+      <a href="login/create.html"> <i class="fas fa-user-plus" fa-10x></i>Sign up</a> 
+      <a href="login/index.html"> <i class="fas fa-sign-in-alt"></i> Login </a>
     </nav>
     `);
     } else {
@@ -40,16 +33,6 @@ function loadNav() {
       <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-unc fixed-top">
         <a class="navbar-brand" href="#">CarolinaPay</a>
         <a id="weather"> Weather </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Useful Links
-              </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="https://sakai.unc.edu">Sakai</a>
                 <a class="dropdown-item" href="https://connectcarolina.unc.edu">Connect Carolina</a>
@@ -58,15 +41,21 @@ function loadNav() {
                 <a class="dropdown-item" href="https://library.unc.edu/">Library</a>
                 <a class="dropdown-item" href="https://campusrec.unc.edu/">Rec</a>
               </div>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Useful Links
+              </a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input id="autocomplete" autocomplete="off" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-success btn-sm my-2 my-sm-0" type="submit">Search</button>
-          </form>
         </div>
         
-        <button class="btn btn-dark btn-sm my-2 my-sm-0" type="submit" id="logoutbtn">Log out</button>
+        <span id="logoutbtn"> 
+
+        <span> <i class="fas fa-sign-out-alt" id="logoutbtn" type=submit"></i> log out </span>
+        </span>
       </nav>
       `);
       $(`#logoutbtn`).on('click', () => {
@@ -81,7 +70,12 @@ function loadNav() {
 
 
     $('body').append(` 
-    <div class="container" style="height: 1000px">
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    Hello! Hope you enjoy CarolinaPay so far!
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
       <div class="row">
         <div class="col" id="profile"> </div>
         <div class="col-6" id="feed"> </div>

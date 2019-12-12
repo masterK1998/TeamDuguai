@@ -11,7 +11,7 @@
     "contact": {
       "kevin": {}
     },
-    "amount": 1300
+    "amount": 760
   },
   "test123": {
     "test": {
@@ -58,7 +58,9 @@
       "onyen": "",
       "pid": ""
     },
-    "contact": {},
-    "amount": null
+    "contact": {
+      "larry": {}
+    },
+    "amount": 12
   }
 }

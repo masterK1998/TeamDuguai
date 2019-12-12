@@ -53,9 +53,45 @@ async function loggedIn() {
 }
 
 function drawRequest(res) {
-    $(`#profile`).append(`<button type="button" class="btn btn-primary" id="request"> request money </button>`);
-    $('#request').on('click', () => {
-        $('#request').hide()
+    //$(`#profile`).append(`<button type="button" class="btn btn-primary" id="request"> request money </button>`);
+    $(`#profile`).append(`
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalRequest">
+            request
+        </button>
+        `);
+
+    $(`#profile`).append(`
+    <div class="modal fade" id="exampleModalRequest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Request money</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <div id = 'submitrequest'> 
+                    <input id="requestfrom" type = "text" name = "to" class = 'requestto' placeholder="from">
+                    <input type = "number" name = "amount" class = 'requesamount' placeholder="amount">
+                    <input type = "text" name = "reference" class = 'requestcomment' placeholder="any comment?">
+                    <input type = "checkbox" name = "public" class = 'requestpublic'>
+                    <label for = "public">Do you want others notice when you recieve?</label>
+                  </div>
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="request btn btn-primary">request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  `);
+
+    //$('#request').on('click', () => {
+        //$('#request').hide()
+        /*
         $('#profile').append(`<div id = 'submitrequest'> 
                     <input id="requestfrom" type = "text" name = "to" class = 'requestto' placeholder="from">
                     <input type = "number" name = "amount" class = 'requesamount' placeholder="amount">
@@ -64,6 +100,7 @@ function drawRequest(res) {
                     <label for = "public">Do you want others notice when you recieve?</label>
                     <button class = "request" type = "button">send</button>
                   </div>`);
+                 */
         $("#requestfrom").on("keyup",_.debounce(async function(e) {
         //res=await axios.get("http://localhost:3000/user/contact/", {headers: { Authorization: `Bearer ${jwt}` }});
         console.log(res.data.result);
@@ -90,17 +127,51 @@ function drawRequest(res) {
                     }) 
                 })
             };
-            $('#submitrequest').remove();
-            $('#request').show()
+            //$('#submitrequest').remove();
+            //$('#request').show()
         })
-    })
 }
 
 function drawTransfer(res) {
-    $(`#profile`).append(`<button type="button" class="btn btn-primary" id="send"> send money </button>`);
+    // send money here
+    //$(`#profile`).append(`<button type="button" class="btn btn-dark" id="send"> send </button>`);
+    $(`#profile`).append(`
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalSend">
+            send
+        </button>
+        `);
+
     let jwt = localStorage.getItem("jwt");
-    $('#send').on('click', () => {
-        $('#send').hide()
+    $(`#profile`).append(`
+    <div class="modal fade" id="exampleModalSend" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Send money</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <div id = 'submitsend'> 
+        <input id="transferto" type = "text" name = "to" class = 'textto' placeholder="to">
+        <input type = "number" name = "amount" class = 'textamount' placeholder="amount">
+        <input type = "text" name = "reference" class = 'textcomment' placeholder="any comment?">
+        <input type = "checkbox" name = "public" class = 'textpublic'>
+        <label for = "public">Do you want others see this transfer?</label>
+      </div> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="send btn btn-primary">send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  `);
+    //$('#send').on('click', () => {
+        //$('#send').hide()
+        /*
         $('#profile').append(`<div id = 'submitsend'> 
                     <input id="transferto" type = "text" name = "to" class = 'textto' placeholder="to">
                     <input type = "number" name = "amount" class = 'textamount' placeholder="amount">
@@ -109,6 +180,7 @@ function drawTransfer(res) {
                     <label for = "public">Do you want others see this transfer?</label>
                     <button class = "send" type = "button">send</button>
                   </div>`);
+                  */
 
     
         $("#transferto").on("keyup",_.debounce(async function(e) {
@@ -142,16 +214,17 @@ function drawTransfer(res) {
                                 sum += asset - amount;
                                 console.log(sum);
                                 axios.post('http://localhost:3000/user/amount', {data: sum}, {headers: { Authorization: `Bearer ${jwt}` }})
+                                
+                                window.location.reload();
                             }) 
                         })
                     }
                 })
-            };
-            $('#submitsend').remove();
-            $('#send').show()
+            }
+            //$('#submitsend').remove();
+            //$('#send').show()
         })
     //$(".text").val(data);
-    })
 }
 
 function renderProfile(person) {

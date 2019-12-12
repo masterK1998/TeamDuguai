@@ -31,12 +31,28 @@
       ]
     }
   },
-  "increment": 4,
+  "increment": 9,
   "comment": {
-    "4": {
-      "id": 4,
+    "5": {
+      "id": 5,
       "from": "kevin",
-      "comment": "easy",
+      "comment": "",
+      "likes": [
+        "larry"
+      ]
+    },
+    "8": {
+      "id": 8,
+      "from": "larry",
+      "comment": "",
+      "likes": [
+        "larry"
+      ]
+    },
+    "9": {
+      "id": 9,
+      "from": "larry",
+      "comment": "",
       "likes": []
     }
   }

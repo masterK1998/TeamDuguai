@@ -21,22 +21,40 @@ $(document).ready(function () {
 
     function drawRequest(res) {
         let request = Object.keys(res.data.result);
-        $('#private').append(
-            `<div id = requestaccept></div>`
+        $('#private').append( `
+            <div class="card bg-light">
+            <div class="card-header">
+                Request
+            </div>
+            <div id="requestaccept" class="card-body">
+            </div>
+            </div>
+            </div>`
         )
         for(let i = 0; i < request.length; i++) {
             let rec = res.data.result[request[i]];
             let acceptid = "accept" + rec.id
             console.log("requested")
             if(rec.to == user && !rec.accepted){
-                $('#requestaccept').append(
-                    `<div id = ${rec.id} class = "record">
+                $('#requestaccept').append(`
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                <div class="toast-header">
+                  <button class="btn btn-sm btn-outline-dark" id = ${acceptid}>accept</button>
+                  <strong class="mr-auto" id="reauest${i}"></strong>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="toast-body">
+                    <div id = ${rec.id} class = "record">
                         <div>request from ${rec.from}</div>
                         <div>${rec.comment}</div>
                         <div>${rec.amount}</div>
-                        <button id = ${acceptid}>accept</button>
-                    </div>`
-                )
+                    </div>
+                </div>
+              </div>`
+                );
+                $(`.toast`).toast('show');
                 $('#' + acceptid).on('click', () => {
                     axios.get('http://localhost:3000/user/amount', {headers: { Authorization: `Bearer ${jwt}` }}).then((res) => {
                         let asset = res.data.result
@@ -69,40 +87,61 @@ $(document).ready(function () {
     function drawTrans(res) {
         let trans = Object.keys(res.data.result);
         $('#private').append(
-            `<div id = trans></div>`
+            `<div class="card bg-light">
+            <div class="card-header">
+                Transfer
+            </div>
+            <div class="card-body" id="trans">
+            </div>
+            </div>
+            </div>`
         )
         for(let i = 0; i < trans.length; i++) {
             let rec = res.data.result[trans[i]];
             let likeid = "like" + rec.id;
             let lkid = "lk" + rec.id;
             if(rec.public || user == rec.from || user == rec.to) {
-                $('#trans').append(
-                    `<div id = ${rec.id} class = "record">
+                $('#trans').append( `
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                <div class="toast-header">
+                  <strong class="mr-auto" id="transheader${i}"></strong>
+                  <small></small>
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="toast-body">
+                    <div id = ${rec.id} class = "record">
                         <div>${rec.from} to ${rec.to}</div>
                         <div>${rec.comment}</div>
                         <div id = ${lkid}>likes: ${rec.likes.length}</div>
-                    </div>`
+                    </div>
+                </div>
+              </div>`
                 )
+                $(`.toast`).toast('show');
                 if(!rec.likes.includes(user)){
-                    $('#' +  rec.id).append(`<button id = ${likeid}>like</button>`)
+                    $('#' +  rec.id).append(`<button class="btn btn-sm btn-outline-danger float-right" id = ${likeid}>like</button>`)
+                    //$('#' +  rec.id).append(`<i class="far fa-heart"></i><span id=${likeid}>like</span>`)
                 }
                 else{
-                    $('#' +  rec.id).append(`<button id = ${likeid}>unlike</button>`)
+                    $('#' +  rec.id).append(`<button class="btn btn-sm btn-outline-danger float-right" id = ${likeid}>unlike</button>`)
+                    //$('#' +  rec.id).append(`<i class="fas fa-heart"></i><span id=${likeid}>unlike</span>`)
                 }
                 if(user == rec.from || user == rec.to) {
                     let acceptid = "accept" + rec.id
                     if(rec.accepted || user == rec.from) {
-                        $('#trans').append(
+                        $(`#transheader${i}`).append(
                             `<div>
                                 ${rec.amount}
                             </div>`
                         )
                     }
                     else {
-                        $('#trans').append(
+                        $(`#transheader${i}`).append(
                             `<div>
                                 ${rec.amount}
-                                <button id = ${acceptid} type = "button">accept</button>
+                                <button id = ${acceptid} class="btn btn-outline-dark btn-sm float-right" type = "button">accept</button>
                             </div>`
                         )
                     }

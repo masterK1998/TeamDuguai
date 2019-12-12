@@ -19,7 +19,7 @@ $(document).ready(function () {
                     Today's Dinning
                 </div>
                 <div class="card-body" id="dinninginfo"> </div>
-                <button type="button" class="btn btn-primary" id="comment">how do you think about today's dinning</button>
+                <button type="button" class="btn btn-outline-success" id="comment">how do you think about today's dinning</button>
             </div>`
         );
         //console.log(Object.keys(res.data.result));
@@ -31,7 +31,6 @@ $(document).ready(function () {
         `<div class="toast" data-autohide="false">
             <div class="toast-header">
                     <strong class="mr-auto">${dinning.name}</strong>
-                    <small class="text-muted">11 mins ago</small>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -52,7 +51,7 @@ $(document).ready(function () {
                 $('#comment').hide()
                 $('#dinninginfo').append(`<div id = 'submitpost'> 
                             <input type = "text" name = "reference" class = 'textcomment' placeholder="any comment?">
-                            <button class = "post" type = "button">post</button>
+                            <button class = "post btn btn-sm btn-outline-dark" type = "button">post</button>
                         </div>`);
                 $('.post').on('click', () => {
                     let comment = $('.textcomment').val();
@@ -98,10 +97,10 @@ $(document).ready(function () {
                     let user = "";
                     user += result.data.user.name;
                     if(!rec.likes.includes(user)){
-                        $('#' +  id).append(`<button id = ${likeid}>like</button>`)
+                        $('#' +  id).append(`<button id = ${likeid} class="btn btn-sm btn-outline-danger">like</button>`)
                     }
                     else{
-                        $('#' +  id).append(`<button id = ${likeid}>unlike</button>`)
+                        $('#' +  id).append(`<button id = ${likeid} class="btn btn-sm btn-outline-danger">unlike</button>`)
                     }
                     $('#' + likeid).on('click', () => {
                         if($('#' + likeid).html() == 'like') {
@@ -127,7 +126,7 @@ $(document).ready(function () {
                         }
                     })
                     if(rec.from == user) {
-                        $('#' +  id).append(`<button id = ${delid}>delete</button>`)
+                        $('#' +  id).append(`<button id = ${delid} class="btn btn-sm btn-outline-dark">delete</button>`)
                         $('#' + delid).on('click', () => {
                             axios.delete('http://localhost:3000/public/comment/' + rec.id, {headers: { Authorization: `Bearer ${jwt}` }})
                         })
@@ -153,7 +152,6 @@ $(document).ready(function () {
             `<div class="toast" data-autohide="false">
             <div class="toast-header">
                     <strong class="mr-auto">${park.name}</strong>
-                    <small class="text-muted">11 mins ago</small>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
