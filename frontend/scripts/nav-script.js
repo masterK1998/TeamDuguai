@@ -5,24 +5,23 @@ function loadNav() {
     <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-unc fixed-top">
       <a class="navbar-brand" href="#">CarolinaPay</a>
       <a id="weather"> Weather </a>
-            <div class="dropdown-menu" aria-labelledby="navbardropdown">
-              <a class="dropdown-item" href="https://sakai.unc.edu">Sakai</a>
-              <a class="dropdown-item" href="https://connectcarolina.unc.edu">Connect Carolina</a>
-              <a class="dropdown-item" href="https://dining.unc.edu/menu-hours/">CDS</a>
-              <a class="dropdown-item" href="https://move.unc.edu/parking/">Parking</a>
-              <a class="dropdown-item" href="https://library.unc.edu/">Library</a>
-              <a class="dropdown-item" href="https://campusrec.unc.edu/">Rec</a>
-            </div>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Useful Links
-            </a>
-          </li>
-        </ul>
-      </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Useful Links
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="https://sakai.unc.edu">Sakai</a>
+                <a class="dropdown-item" href="https://connectcarolina.unc.edu">Connect Carolina</a>
+                <a class="dropdown-item" href="https://dining.unc.edu/menu-hours/">CDS</a>
+                <a class="dropdown-item" href="https://move.unc.edu/parking/">Parking</a>
+                <a class="dropdown-item" href="https://library.unc.edu/">Library</a>
+                <a class="dropdown-item" href="https://campusrec.unc.edu/">Rec</a>
+              </div>
+              </a>
+            </li>
+          </ul>
+        </div>
       
       <a href="login/create.html"> <i class="fas fa-user-plus" fa-10x></i>Sign up</a> 
       <a href="login/index.html"> <i class="fas fa-sign-in-alt"></i> Login </a>
@@ -33,6 +32,12 @@ function loadNav() {
       <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-unc fixed-top">
         <a class="navbar-brand" href="#">CarolinaPay</a>
         <a id="weather"> Weather </a>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Useful Links
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="https://sakai.unc.edu">Sakai</a>
                 <a class="dropdown-item" href="https://connectcarolina.unc.edu">Connect Carolina</a>
@@ -41,12 +46,6 @@ function loadNav() {
                 <a class="dropdown-item" href="https://library.unc.edu/">Library</a>
                 <a class="dropdown-item" href="https://campusrec.unc.edu/">Rec</a>
               </div>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Useful Links
               </a>
             </li>
           </ul>
